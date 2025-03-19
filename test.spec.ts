@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('User Login, Add Product to Cart, and Place Order', async ({ page }) => {
+test('User Login, Add Multiple Products to Cart, and Place Order', async ({ page }) => {
   // Navigate to the website
   console.log('Navigating to the website...');
   await page.goto('https://automationexercise.com/');
@@ -9,28 +9,41 @@ test('User Login, Add Product to Cart, and Place Order', async ({ page }) => {
   console.log('Navigating to Signup/Login page...');
   await page.getByRole('link', { name: ' Signup / Login' }).click();
   console.log('Filling in login credentials...');
-  await page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address').fill('Winona.MacGyver50@yahoo.com');
-  await page.getByRole('textbox', { name: 'Password' }).fill('gYwxJUKqQT3NKUR');
+  await page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address').fill('Waino.Feest41@yahoo.com');
+  await page.getByRole('textbox', { name: 'Password' }).fill('EeAWNsmGIm_eDv7');
   await page.getByRole('button', { name: 'Login' }).click();
 
   // Verify login success
   console.log('Verifying login success...');
   await expect(page.getByText('Logged in as')).toBeVisible();
 
-  // Navigate to Products and add a product to the cart
+  // Navigate to Products and add products to the cart
   console.log('Navigating to Products...');
   await page.getByRole('link', { name: ' Products' }).click();
-  console.log('Navigating to Women category...');
-  await page.getByRole('link', { name: ' Women' }).click();
-  console.log('Selecting a product...');
-  await page.getByRole('link', { name: 'Saree' }).click();
+
+  console.log('Navigating to Men category...');
+  await page.getByRole('link', { name: ' Men' }).click();
+  console.log('Adding Jeans to the cart...');
+  await page.getByRole('link', { name: 'Jeans' }).click();
   await page.getByRole('link', { name: ' View Product' }).first().click();
-  console.log('Adding product to the cart...');
   await page.getByRole('button', { name: ' Add to cart' }).click();
+  await page.getByRole('button', { name: 'Continue Shopping' }).click();
+
+  console.log('Adding Polo to the cart...');
+  await page.getByRole('link', { name: '(6) Polo' }).click();
+  await page.locator('.choose > .nav > li > a').first().click();
+  await page.getByRole('button', { name: ' Add to cart' }).click();
+  await page.getByRole('button', { name: 'Continue Shopping' }).click();
+
+  console.log('Adding Biba to the cart...');
+  await page.getByRole('link', { name: '(5) Biba' }).click();
+  await page.getByRole('link', { name: ' View Product' }).first().click();
+  await page.getByRole('button', { name: ' Add to cart' }).click();
+  await page.getByRole('button', { name: 'Continue Shopping' }).click();
 
   // View the cart and proceed to checkout
   console.log('Viewing the cart...');
-  await page.getByRole('link', { name: 'View Cart' }).click();
+  await page.getByRole('link', { name: ' Cart' }).click();
   console.log('Proceeding to checkout...');
   await page.getByText('Proceed To Checkout').click();
 
@@ -38,7 +51,7 @@ test('User Login, Add Product to Cart, and Place Order', async ({ page }) => {
   console.log('Placing the order...');
   await page.getByRole('link', { name: 'Place Order' }).click();
   console.log('Filling in payment details...');
-  await page.locator('input[name="name_on_card"]').fill('maty');
+  await page.locator('input[name="name_on_card"]').fill('Mitali');
   await page.locator('input[name="card_number"]').fill('1111111111111111');
   await page.getByRole('textbox', { name: 'ex.' }).fill('311');
   await page.getByRole('textbox', { name: 'MM' }).fill('10');
