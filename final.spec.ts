@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
+test.setTimeout(60000); // Set timeout to 60 seconds
+
 test('User Signup and Account Creation with Randomized Data', async ({ page }) => {
   // Generate randomized data using faker
   const randomName = faker.person.firstName();

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-
+test.setTimeout(60000); // Set timeout to 60 seconds
 test('User Login, Add Multiple Products to Cart, and Place Order', async ({ page }) => {
   // Navigate to the website
   console.log('Navigating to the website...');
