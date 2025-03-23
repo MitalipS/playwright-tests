@@ -28,6 +28,7 @@ test('User Signup and Account Creation with Randomized Data', async ({ page }) =
 
   // Navigate to the website
   console.log('Navigating to the website...');
+  await page.screenshot({ path: 'debug-screenshot.png' });
   await page.goto('https://automationexercise.com/');
 
   // Navigate to the Signup/Login page
@@ -66,6 +67,7 @@ test('User Signup and Account Creation with Randomized Data', async ({ page }) =
 
   // Continue to the account page
   console.log('Continuing to the account page...');
+  await page.waitForSelector('role=link[name="Continue"]', { state: 'visible' });
   await page.getByRole('link', { name: 'Continue' }).click();
 });
 
@@ -198,6 +200,7 @@ test('User Login, Add Product to Cart, and Place Order', async ({ page }) => {
 
   // Continue after placing the order
   console.log('Continuing after placing the order...');
+  await page.waitForSelector('role=link[name="Continue"]', { state: 'visible' });
   await page.getByRole('link', { name: 'Continue' }).click();
 });
 
