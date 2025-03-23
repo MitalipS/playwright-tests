@@ -81,7 +81,8 @@ test('User Navigation and Logout Flow', async ({ page }) => {
   await page.getByRole('link', { name: ' Signup / Login' }).click();
   console.log('Filling in login credentials...');
   await page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address').fill('Winona.MacGyver50@yahoo.com');
-  await page.getByRole('textbox', { name: 'Password' }).fill('gYwxJUKqQT3NKUR');
+  await page.waitForSelector('input[placeholder="Password"]', { state: 'visible' });
+  await page.getByRole('textbox', { name: 'Password' }).fill('gYwxJUKqQT3NKUR', { timeout: 60000 });
   await page.getByRole('button', { name: 'Login' }).click();
 
   // Verify login success
@@ -90,10 +91,11 @@ test('User Navigation and Logout Flow', async ({ page }) => {
 
   // Navigate through various sections
   console.log('Navigating to Products...');
-  await page.getByRole('link', { name: ' Products' }).click();
+  await page.waitForSelector('a[href="/products"]', { state: 'visible' });
+  await page.getByRole('link', { name: ' Products' }).click({ timeout: 60000 });
 
   console.log('Navigating to Cart...');
-  await page.getByRole('link', { name: ' Cart' }).click();
+  await page.getByRole('link', { name: ' Cart' }).click({ timeout: 60000 });
 
   console.log('Navigating to Test Cases...');
   await page.getByRole('link', { name: ' Test Cases' }).click();
@@ -155,7 +157,8 @@ test('User Login, Add Product to Cart, and Place Order', async ({ page }) => {
 
   // Login to the account
   console.log('Navigating to Signup/Login page...');
-  await page.getByRole('link', { name: ' Signup / Login' }).click();
+  await page.waitForSelector('a[href="/login"]', { state: 'visible' });
+  await page.getByRole('link', { name: ' Signup / Login' }).click({ timeout: 60000 });
   console.log('Filling in login credentials...');
   await page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address').fill('Winona.MacGyver50@yahoo.com');
   await page.getByRole('textbox', { name: 'Password' }).fill('gYwxJUKqQT3NKUR');
@@ -167,7 +170,8 @@ test('User Login, Add Product to Cart, and Place Order', async ({ page }) => {
 
   // Navigate to Products and add a product to the cart
   console.log('Navigating to Products...');
-  await page.getByRole('link', { name: ' Products' }).click();
+  await page.waitForSelector('a[href="/products"]', { state: 'visible' });
+  await page.getByRole('link', { name: ' Products' }).click({ timeout: 60000 });
   console.log('Navigating to Women category...');
   await page.getByRole('link', { name: ' Women' }).click();
   console.log('Selecting a product...');
@@ -178,7 +182,8 @@ test('User Login, Add Product to Cart, and Place Order', async ({ page }) => {
 
   // View the cart and proceed to checkout
   console.log('Viewing the cart...');
-  await page.getByRole('link', { name: 'View Cart' }).click();
+  await page.waitForSelector('a[href="/view_cart"]', { state: 'visible' });
+  await page.getByRole('link', { name: ' Cart' }).click();
   console.log('Proceeding to checkout...');
   await page.getByText('Proceed To Checkout').click();
 
@@ -211,7 +216,8 @@ test('User Login, Add Multiple Products to Cart, and Place Order', async ({ page
 
   // Login to the account
   console.log('Navigating to Signup/Login page...');
-  await page.getByRole('link', { name: ' Signup / Login' }).click();
+  await page.waitForSelector('a[href="/login"]', { state: 'visible' });
+  await page.getByRole('link', { name: ' Signup / Login' }).click({ timeout: 60000 });
   console.log('Filling in login credentials...');
   await page.locator('form').filter({ hasText: 'Login' }).getByPlaceholder('Email Address').fill('Waino.Feest41@yahoo.com');
   await page.getByRole('textbox', { name: 'Password' }).fill('EeAWNsmGIm_eDv7');
@@ -223,7 +229,8 @@ test('User Login, Add Multiple Products to Cart, and Place Order', async ({ page
 
   // Navigate to Products and add products to the cart
   console.log('Navigating to Products...');
-  await page.getByRole('link', { name: ' Products' }).click();
+  await page.waitForSelector('a[href="/products"]', { state: 'visible' });
+  await page.getByRole('link', { name: ' Products' }).click({ timeout: 60000 });
 
   console.log('Navigating to Men category...');
   await page.getByRole('link', { name: ' Men' }).click();
@@ -247,7 +254,8 @@ test('User Login, Add Multiple Products to Cart, and Place Order', async ({ page
 
   // View the cart and proceed to checkout
   console.log('Viewing the cart...');
-  await page.getByRole('link', { name: ' Cart' }).click();
+  await page.waitForSelector('a[href="/view_cart"]', { state: 'visible' });
+  await page.getByRole('link', { name: ' Cart' }).click({ timeout: 60000 });
   console.log('Proceeding to checkout...');
   await page.getByText('Proceed To Checkout').click();
 
